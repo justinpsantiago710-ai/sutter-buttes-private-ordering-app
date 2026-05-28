@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+  <rect width="640" height="640" fill="#090707"/>
+  <circle cx="320" cy="260" r="176" fill="#641912" stroke="#d8ad3f" stroke-width="10"/>
+  <path d="M226 382c-30-64-10-154 58-190 72 38 92 130 54 190H226Z" fill="#f3d7b8"/>
+  <path d="M370 380c-42-70-26-150 48-198 70 44 88 132 52 198H370Z" fill="#8c1f16"/>
+  <path d="M186 404h268l52 72H132l54-72Z" fill="#831a14" stroke="#d8ad3f" stroke-width="7"/>
+  <text x="320" y="465" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-size="70" fill="#e7c36a">ZODASHI</text>
+  <text x="320" y="548" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-size="32" fill="#fffdf5">CURATED BY SUTTER BUTTES</text>
+</svg>

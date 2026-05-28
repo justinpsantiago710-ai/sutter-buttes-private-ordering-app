@@ -1,0 +1,1329 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sutter Buttes Cannabis Co.</title>
+    <meta name="theme-color" content="#193429">
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css?v=52">
+  </head>
+  <body>
+    <form name="order-alert" data-netlify="true" netlify hidden>
+      <input type="hidden" name="form-name" value="order-alert">
+      <input type="text" name="order_number">
+      <input type="text" name="customer">
+      <input type="text" name="phone">
+      <input type="email" name="email">
+      <input type="text" name="contact_method">
+      <input type="text" name="address">
+      <input type="text" name="delivery">
+      <input type="text" name="cash_due">
+      <textarea name="items"></textarea>
+      <textarea name="instructions"></textarea>
+    </form>
+
+    <form name="customer-message-alert" data-netlify="true" netlify hidden>
+      <input type="hidden" name="form-name" value="customer-message-alert">
+      <input type="text" name="name">
+      <input type="text" name="phone">
+      <textarea name="message"></textarea>
+    </form>
+
+    <section class="access-gate" id="accessGate" aria-label="Private access">
+      <form class="access-panel" id="accessForm">
+        <div class="mini-lock" aria-hidden="true">SB</div>
+        <p class="eyebrow">Private access</p>
+        <h1>Sutter Buttes</h1>
+        <p class="access-copy">Enter the weekly guest code or your approved member code.</p>
+        <label>
+          <span>Access code</span>
+          <input id="accessCodeInput" type="password" autocomplete="off" placeholder="Enter code">
+        </label>
+        <p class="access-error" id="accessError" role="alert"></p>
+        <button class="primary-button full" type="submit">Unlock</button>
+      </form>
+    </section>
+
+    <main class="app-shell">
+      <section class="phone" aria-label="Private member catalog and order portal">
+        <header class="status-bar">
+          <span>9:41</span>
+          <button class="lock-button" type="button" id="lockAppButton" data-switch-access>Switch code</button>
+        </header>
+
+        <section class="top-panel">
+          <div>
+            <p class="eyebrow">Verified member area</p>
+            <div class="location-button" id="locationButton" aria-label="Service area">
+              <span id="locationText">Yuba City / Sutter County</span>
+            </div>
+          </div>
+          <button class="icon-button" type="button" id="accountSwitchButton" data-switch-access aria-label="Switch access code">
+            SB
+          </button>
+        </section>
+
+        <section class="role-switch" id="roleSwitch" aria-label="View mode">
+          <button class="role-button active" type="button" data-role="customer">Member view</button>
+          <button class="role-button" type="button" data-role="worker">Worker view</button>
+          <button class="role-button" type="button" data-role="admin">Admin view</button>
+        </section>
+
+        <nav class="mode-switch" id="modeSwitch" aria-label="Platform mode">
+          <button class="mode active" type="button" data-mode="customer" data-role-tab="customer">Catalog</button>
+          <button class="mode" type="button" data-mode="merchant" data-role-tab="admin">Orders</button>
+          <button class="mode" type="button" data-mode="driver" data-role-tab="admin">Driver</button>
+          <button class="mode" type="button" data-mode="catalog" data-role-tab="admin">Menu</button>
+          <button class="mode" type="button" data-mode="frontpage" data-role-tab="admin">Design/Layout</button>
+          <button class="mode utility-style-tab" type="button" data-mode="promo" data-role-tab="admin">Promo</button>
+          <button class="mode utility-style-tab" type="button" data-mode="design" data-role-tab="admin">Style</button>
+          <button class="mode" type="button" data-mode="access" data-role-tab="admin">Access</button>
+          <button class="mode" type="button" data-mode="team" data-role-tab="admin">Team</button>
+          <button class="mode" type="button" data-mode="settings" data-role-tab="admin">Delivery</button>
+          <button class="mode" type="button" data-mode="backend" data-role-tab="admin">Backend</button>
+        </nav>
+
+        <section class="staff-sync-strip staff-sync-hidden" id="staffSyncPanel" hidden aria-hidden="true">
+          <div>
+            <p class="eyebrow">Sync status</p>
+            <p class="fee-note" id="staffSyncStatus">Saved locally.</p>
+          </div>
+        </section>
+
+        <section class="search-row" data-view="customer">
+          <label class="search-box">
+            <span aria-hidden="true">Search</span>
+            <input id="searchInput" type="search" placeholder="Flower, carts, clones, seeds, syrups">
+          </label>
+        </section>
+
+        <section class="content">
+          <div class="view active" id="customerView">
+            <nav class="customer-page-nav" aria-label="Member navigation">
+              <button class="active" type="button" data-customer-nav="home" id="homeNavLabel">Home</button>
+              <button type="button" data-customer-nav="catalog" id="catalogNavLabel">Catalog</button>
+              <button type="button" data-customer-nav="member" id="memberNavLabel">Member Access</button>
+              <button type="button" data-customer-nav="cart" id="cartNavLabel">Cart</button>
+              <button type="button" data-customer-nav="order" id="orderNavLabel">Track Order</button>
+            </nav>
+
+            <section class="customer-page active" id="customerHomePage" data-customer-page="home">
+            <section class="brand-lockup" aria-label="Sutter Buttes Cannabis Co.">
+              <img class="brand-logo-image" id="brandLogoImage" src="" alt="Brand logo" hidden>
+              <div class="mountain-mark" id="mountainMark" aria-hidden="true">
+                <span class="sun-mark"></span>
+                <span class="peak peak-one"></span>
+                <span class="peak peak-two"></span>
+                <span class="peak peak-three"></span>
+              </div>
+              <div>
+                <p class="eyebrow" id="brandEyebrow">Est. 2026</p>
+                <h2 id="brandHeadline">Sutter Buttes Cannabis Co.</h2>
+                <p id="brandDescription">Mountain-grown energy, curated drops, local delivery.</p>
+              </div>
+            </section>
+
+            <section class="hero-order">
+              <div>
+                <p class="eyebrow" id="heroEyebrow">Licensed dispensary</p>
+                <h1 id="heroMerchantName">Sutter Buttes</h1>
+                <p id="heroDescription">Private member catalog access with fulfillment reviewed by the team.</p>
+              </div>
+              <div class="hero-actions">
+                <button class="primary-button" type="button" id="quickAddButton">Browse catalog</button>
+                <button class="ghost-button inverse" type="button" id="homeMemberAccessButton">Member Access</button>
+                <button class="ghost-button inverse" type="button" id="homeTrackOrderButton">Track Order</button>
+              </div>
+            </section>
+
+            <form class="home-search-panel" id="homeSearchForm">
+              <label>
+                <span id="homeSearchLabel">Search the private catalog</span>
+                <input id="homeSearchInput" type="search" placeholder="Flower, carts, clones, seeds, syrups">
+              </label>
+              <button class="primary-button" type="submit" id="homeSearchButton">Search menu</button>
+            </form>
+
+            <section class="promo-banner" id="promoBanner">
+              <div>
+                <p class="eyebrow" id="promoEyebrow">Private drop</p>
+                <h2 id="promoHeadline">Weekend menu update</h2>
+                <p id="promoDescription">Fresh flower, syrup flavors, and merch drops are live.</p>
+              </div>
+              <button class="primary-button" type="button" id="promoButton">View catalog</button>
+            </section>
+            <section class="shoutout-grid" id="shoutoutGrid" aria-label="Limited deal shoutouts"></section>
+
+            <section class="drop-card">
+              <div>
+                <p class="eyebrow">Featured drop</p>
+                <h2 id="featuredDropName">11PM</h2>
+                <p id="featuredDropDescription">Curated by Sutter Buttes Cannabis Co.</p>
+              </div>
+              <div class="digital-badge" aria-hidden="true">11PM</div>
+            </section>
+
+            <section class="product-notes" aria-label="Product collections">
+              <article>
+                <span>Flower</span>
+                <strong>Strain cards</strong>
+                <p id="flowerNote">Tractor Gas, Zodashi, Dog Food, 11PM.</p>
+                <button class="text-link-button" type="button" data-home-category="flower" id="flowerCategoryButton">View flower</button>
+              </article>
+              <article>
+                <span>Syrups</span>
+                <strong>Flavor drops</strong>
+                <p id="syrupNote">Mango, pineapple, cucumber, watermelon, chile.</p>
+                <button class="text-link-button" type="button" data-home-category="syrup" id="syrupCategoryButton">View syrups</button>
+              </article>
+              <article>
+                <span>Apparel</span>
+                <strong>Brand merch</strong>
+                <p id="apparelNote">Trucker hats, tees, limited collab pieces.</p>
+                <button class="text-link-button" type="button" data-home-category="apparel" id="apparelCategoryButton">View apparel</button>
+              </article>
+            </section>
+            </section>
+
+            <section class="customer-page" id="customerCatalogPage" data-customer-page="catalog">
+              <section class="horizontal-list" id="categoryFilters" aria-label="Service categories">
+                <button class="category active" type="button" data-filter="all">All</button>
+              </section>
+
+              <section class="browse-panel" aria-label="Menu browser">
+                <div class="browse-heading">
+                  <div>
+                    <p class="eyebrow">Browse menu</p>
+                    <h2 id="browseTitle">All products</h2>
+                  </div>
+                  <button class="ghost-button" type="button" id="clearBrowseFilters">Clear</button>
+                </div>
+                <div class="browse-group">
+                  <span>Type</span>
+                  <div class="chip-row" id="subcategoryFilters"></div>
+                </div>
+                <div class="browse-group">
+                  <span>Brand</span>
+                  <div class="chip-row" id="brandFilters"></div>
+                </div>
+                <label class="price-filter">
+                  <span>Price range</span>
+                  <select id="priceRangeFilter">
+                    <option value="all">Any price</option>
+                    <option value="0-50">Under $50</option>
+                    <option value="50-100">$50-$100</option>
+                    <option value="100-200">$100-$200</option>
+                    <option value="200+">$200+</option>
+                  </select>
+                </label>
+              </section>
+
+              <section class="merchant-list" id="merchantList" aria-label="Private catalog"></section>
+            </section>
+
+            <section class="cart-page customer-page" id="customerCartPage" data-customer-page="cart">
+              <div class="member-heading">
+                <div>
+                  <p class="eyebrow">Cart / Checkout</p>
+                  <h2>Review your order request</h2>
+                  <p class="fee-note">Adjust items here, then continue to fulfillment details when you are ready.</p>
+                </div>
+              </div>
+              <section class="cart-review cart-page-review" aria-label="Cart page review">
+                <div class="cart-lines" id="cartPageLines"></div>
+                <div class="cart-totals" id="cartPageTotals"></div>
+              </section>
+              <div class="cart-page-actions">
+                <button class="ghost-button" type="button" id="cartPageBrowseButton">Browse catalog</button>
+                <button class="primary-button" type="button" id="cartPageCheckoutButton">Continue checkout</button>
+              </div>
+            </section>
+
+            <section class="customer-status-panel customer-page" id="customerStatusPanel" data-customer-page="order" hidden>
+              <div>
+                <p class="eyebrow">Order updates</p>
+                <h2 id="customerStatusTitle">No active order</h2>
+                <p id="customerStatusBody">Enter an exact order number below to view customer-safe status details.</p>
+              </div>
+              <div class="live-update-row">
+                <p class="fee-note" id="customerLiveStatus">Place or track an order to connect live updates.</p>
+                <button class="ghost-button" type="button" id="refreshCustomerOrderButton">Refresh updates</button>
+              </div>
+              <ol class="status-timeline" id="customerStatusTimeline"></ol>
+              <section class="customer-status-meta" id="customerStatusMeta" aria-label="Order lookup details"></section>
+              <section class="customer-activity-feed" id="customerActivityFeed" aria-label="Member order activity"></section>
+            </section>
+
+            <section class="member-panel customer-page" data-customer-page="member">
+              <div class="member-heading">
+                <div>
+                  <p class="eyebrow">Member access</p>
+                  <h2>Member Profile</h2>
+                  <p class="fee-note" id="memberEmailStatus">Submit a member request below, or enter an approved member code to connect a member profile.</p>
+                </div>
+                <span class="connection-pill" id="memberConnectionPill">Guest</span>
+              </div>
+              <form class="feedback-form" id="memberEmailForm" hidden aria-hidden="true">
+                <label>
+                  <span>Name</span>
+                  <input id="memberNameInput" type="text" autocomplete="name" placeholder="Your name">
+                </label>
+                <label>
+                  <span>Phone number</span>
+                  <input id="memberPhoneInput" type="tel" autocomplete="tel" placeholder="For order lookup">
+                </label>
+                <label>
+                  <span>Email address</span>
+                  <input id="memberEmailInput" type="email" autocomplete="email" placeholder="you@example.com">
+                </label>
+              </form>
+              <form class="feedback-form member-request-form" id="memberRequestForm">
+                <div>
+                  <p class="eyebrow">Request member access</p>
+                  <h3>Create a pending member profile</h3>
+                  <p class="fee-note">Guest requests are reviewed by the team before an approved member code is issued.</p>
+                </div>
+                <label>
+                  <span>Name</span>
+                  <input id="requestMemberNameInput" type="text" autocomplete="name" required>
+                </label>
+                <label>
+                  <span>Phone number</span>
+                  <input id="requestMemberPhoneInput" type="tel" autocomplete="tel" required>
+                </label>
+                <label>
+                  <span>Email address</span>
+                  <input id="requestMemberEmailInput" type="email" autocomplete="email" placeholder="Optional">
+                </label>
+                <label>
+                  <span>Preferred contact</span>
+                  <select id="requestMemberContactInput">
+                    <option>Text</option>
+                    <option>Call</option>
+                    <option>Email</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Notes</span>
+                  <textarea id="requestMemberNotesInput" rows="3" placeholder="Anything the team should know"></textarea>
+                </label>
+                <button class="primary-button full" type="submit">Submit request</button>
+                <p class="fee-note" id="memberRequestStatus">Pending requests do not unlock approved member privileges.</p>
+              </form>
+              <section class="receipt-list" id="customerReceiptList" aria-live="polite" hidden></section>
+            </section>
+
+            <section class="order-recovery-panel customer-page" data-customer-page="order">
+              <div>
+                <p class="eyebrow">Order lookup</p>
+                <h2>Track an order</h2>
+                <p class="fee-note">Enter the exact order number from your confirmation screen.</p>
+              </div>
+              <form class="feedback-form" id="orderLookupForm">
+                <label>
+                  <span>Order number</span>
+                  <input id="lookupOrderInput" type="text" placeholder="SB-K7M4Q2" autocomplete="off" required>
+                </label>
+                <input id="lookupPhoneInput" type="hidden">
+                <button class="ghost-button" type="submit">Find order</button>
+                <p class="fee-note" id="lookupStatus">Only the matching order will show here.</p>
+              </form>
+            </section>
+
+            <section class="feedback-panel customer-page" data-customer-page="member">
+              <div>
+                <p class="eyebrow">Questions or feedback</p>
+                <h2>Message the team</h2>
+              </div>
+              <form class="feedback-form" id="feedbackForm">
+                <label>
+                  <span>Name</span>
+                  <input id="feedbackNameInput" type="text" autocomplete="name" required>
+                </label>
+                <label>
+                  <span>Phone number</span>
+                  <input id="feedbackPhoneInput" type="tel" autocomplete="tel" required>
+                </label>
+                <label>
+                  <span>Message</span>
+                  <textarea id="feedbackMessageInput" rows="3" placeholder="Question, feedback, or callback request" required></textarea>
+                </label>
+                <p class="fee-note" id="feedbackStatus">We will get back to you by text or call.</p>
+                <button class="ghost-button" type="submit">Send message</button>
+              </form>
+            </section>
+          </div>
+
+          <div class="view" id="merchantView">
+            <section class="merchant-header">
+              <div>
+                <p class="eyebrow">Fulfillment</p>
+                <h2>Delivery queue</h2>
+                <p class="fee-note" id="liveOrdersStatus">Live order refresh is waiting for backend sign-in.</p>
+              </div>
+              <button class="ghost-button" type="button" id="refreshOrdersButton">Sync now</button>
+              <button class="primary-button" type="button" id="enableNotificationsButton">Enable alerts</button>
+              <label class="toggle">
+                <input type="checkbox" checked>
+                <span>Open</span>
+              </label>
+            </section>
+
+            <section class="admin-alert" id="adminAlert" hidden>
+              <p class="eyebrow">New order</p>
+              <h3 id="adminAlertTitle">Order received</h3>
+              <p id="adminAlertBody">A new private delivery request is ready to review.</p>
+            </section>
+
+            <section class="alert-dashboard" aria-label="Order alert indicators">
+              <article>
+                <span>Needs review</span>
+                <strong id="pendingOrderCount">0</strong>
+              </article>
+              <article>
+                <span>Out today</span>
+                <strong id="activeDeliveryCount">0</strong>
+              </article>
+              <article>
+                <span>Messages</span>
+                <strong id="newFeedbackCount">0</strong>
+              </article>
+            </section>
+
+            <section class="order-workbench" aria-label="Order filters">
+              <label>
+                <span>Find order</span>
+                <input id="orderSearchInput" type="search" placeholder="Name, phone, order #, item">
+              </label>
+              <label>
+                <span>Status</span>
+                <select id="orderStatusFilter">
+                  <option value="all">All</option>
+                  <option value="new">New</option>
+                  <option value="active">Active</option>
+                  <option value="out">Out</option>
+                  <option value="completed">Completed</option>
+                  <option value="canceled">Canceled</option>
+                </select>
+              </label>
+              <div class="status-tabs" aria-label="Order status tabs">
+                <button class="status-tab active" type="button" data-order-status-tab="all">All</button>
+                <button class="status-tab" type="button" data-order-status-tab="new">New</button>
+                <button class="status-tab" type="button" data-order-status-tab="active">Active</button>
+                <button class="status-tab" type="button" data-order-status-tab="out">Out</button>
+                <button class="status-tab" type="button" data-order-status-tab="completed">Completed</button>
+                <button class="status-tab" type="button" data-order-status-tab="canceled">Canceled</button>
+              </div>
+              <label>
+                <span>Assigned</span>
+                <select id="orderAssigneeFilter">
+                  <option value="all">Everyone</option>
+                </select>
+              </label>
+              <button class="ghost-button" type="button" id="clearOrderFilters">Clear filters</button>
+            </section>
+
+            <section class="order-stack" id="merchantOrders"></section>
+
+            <section class="feedback-inbox">
+              <div class="merchant-header">
+                <div>
+                  <p class="eyebrow">Member contact</p>
+                  <h2>Messages</h2>
+                </div>
+                <button class="ghost-button" type="button" id="refreshFeedbackButton">Refresh</button>
+              </div>
+              <section id="feedbackInbox"></section>
+            </section>
+          </div>
+
+          <div class="view" id="driverView">
+            <section class="merchant-header">
+              <div>
+                <p class="eyebrow">Driver workflow</p>
+                <h2>My deliveries</h2>
+                <p class="fee-note" id="driverStatusNote">Assigned delivery orders appear here.</p>
+              </div>
+              <button class="primary-button" type="button" id="refreshDriverButton">Refresh</button>
+            </section>
+
+            <section class="driver-dashboard" aria-label="Driver delivery summary">
+              <article>
+                <span>Assigned active</span>
+                <strong id="driverAssignedCount">0</strong>
+              </article>
+              <article>
+                <span>Ready to pack</span>
+                <strong id="driverConfirmedCount">0</strong>
+              </article>
+              <article>
+                <span>Packed</span>
+                <strong id="driverPackedCount">0</strong>
+              </article>
+              <article>
+                <span>Out now</span>
+                <strong id="driverOutCount">0</strong>
+              </article>
+            </section>
+
+            <section class="driver-stack" id="driverOrders"></section>
+          </div>
+
+          <div class="view" id="catalogView">
+            <section class="merchant-header">
+              <div>
+                <p class="eyebrow">Admin tools</p>
+                <h2>Item catalog</h2>
+              </div>
+              <button class="primary-button" type="button" id="resetCatalogButton" data-owner-only="deleteProducts">Reset</button>
+            </section>
+
+            <section class="catalog-workbench" aria-label="Catalog filters">
+              <label>
+                <span>Find item</span>
+                <input id="adminCatalogSearch" type="search" placeholder="Search product, brand, type">
+              </label>
+              <label>
+                <span>Category</span>
+                <select id="adminCategoryFilter"></select>
+              </label>
+              <label>
+                <span>Subcategory</span>
+                <select id="adminSubcategoryFilter"></select>
+              </label>
+              <label>
+                <span>Brand</span>
+                <select id="adminBrandFilter"></select>
+              </label>
+              <label>
+                <span>Status</span>
+                <select id="adminStatusFilter">
+                  <option value="all">All status</option>
+                  <option value="live">Live</option>
+                  <option value="lowstock">Low stock</option>
+                  <option value="paused">Paused</option>
+                  <option value="soldout">Sold out</option>
+                </select>
+              </label>
+              <button class="ghost-button" type="button" id="clearCatalogFilters">Clear filters</button>
+            </section>
+
+            <section class="inventory-dashboard" aria-label="Inventory summary">
+              <article>
+                <span>Live items</span>
+                <strong id="inventoryLiveCount">0</strong>
+              </article>
+              <article>
+                <span>Low stock</span>
+                <strong id="inventoryLowCount">0</strong>
+              </article>
+              <article>
+                <span>Sold out</span>
+                <strong id="inventorySoldOutCount">0</strong>
+              </article>
+              <article>
+                <span>Paused</span>
+                <strong id="inventoryPausedCount">0</strong>
+              </article>
+              <p class="fee-note" id="inventoryActionNote">Low stock means 3 or fewer units left.</p>
+            </section>
+
+            <form class="catalog-form" id="catalogForm">
+              <label>
+                <span>Name</span>
+                <input id="itemName" type="text" placeholder="Avocado toast" required>
+              </label>
+              <label>
+                <span>Price</span>
+                <input id="itemPrice" type="number" min="0" step="0.01" placeholder="12.50" required>
+              </label>
+              <label>
+                <span>Size / price options</span>
+                <textarea id="itemVariants" rows="4" placeholder="1/8 | 42&#10;1/4 | 75&#10;Half oz | 140&#10;Full oz | 260"></textarea>
+              </label>
+              <label>
+                <span>Description</span>
+                <textarea id="itemDescription" rows="3" placeholder="Strain, flavor, size, drop notes"></textarea>
+              </label>
+              <label>
+                <span>Category</span>
+                <input id="itemCategory" type="text" list="categorySuggestions" placeholder="Flower">
+                <datalist id="categorySuggestions"></datalist>
+              </label>
+              <label>
+                <span>Subcategory</span>
+                <input id="itemSubcategory" type="text" placeholder="Indoor, outdoor, rosin, live resin">
+              </label>
+              <label>
+                <span>Brand / producer</span>
+                <input id="itemBrand" type="text" placeholder="Sutter Buttes, connected brand, farm">
+              </label>
+              <label>
+                <span>Stock count</span>
+                <input id="itemStock" type="number" min="0" step="1" placeholder="10">
+              </label>
+              <label>
+                <span>Daily limit</span>
+                <input id="itemLimit" type="number" min="0" step="1" placeholder="2 per customer">
+              </label>
+              <label>
+                <span>Tags</span>
+                <input id="itemTags" type="text" placeholder="Hybrid, limited, rosin">
+              </label>
+              <label>
+                <span>Product image URL</span>
+                <input id="itemImageUrl" type="url" placeholder="https://... or assets/photo.png">
+              </label>
+              <label>
+                <span>Upload product picture</span>
+                <input id="itemImageFile" type="file" accept="image/*">
+              </label>
+              <div class="catalog-edit-row">
+                <button class="primary-button full" type="submit" id="catalogSubmitButton">Add item</button>
+                <button class="ghost-button" type="button" id="cancelEditButton" hidden>Cancel</button>
+              </div>
+            </form>
+
+            <section class="catalog-list" id="catalogList" aria-label="Editable item catalog"></section>
+          </div>
+
+          <div class="view" id="designView">
+            <section class="merchant-header">
+              <div>
+                <p class="eyebrow">Brand studio</p>
+                <h2>Design style</h2>
+              </div>
+              <button class="primary-button" type="button" id="resetDesignButton">Reset</button>
+            </section>
+
+            <form class="catalog-form" id="designForm">
+              <label>
+                <span>App name</span>
+                <input id="brandNameInput" type="text" maxlength="28" placeholder="Sutter Buttes">
+              </label>
+              <label>
+                <span>Primary color</span>
+                <input id="brandColorInput" type="color" value="#2f9d7e">
+              </label>
+              <label>
+                <span>Style preset</span>
+                <select id="stylePresetInput">
+                  <option value="fresh">Clean dispensary</option>
+                  <option value="premium">Premium dark</option>
+                  <option value="bright">Warm boutique</option>
+                </select>
+              </label>
+              <button class="primary-button full" type="submit">Apply design</button>
+            </form>
+
+            <section class="brand-preview" aria-label="Brand preview">
+              <p class="eyebrow">Preview</p>
+              <h3 id="brandPreviewName">Sutter Buttes</h3>
+              <p>Licensed, age-gated delivery with a simple product menu.</p>
+              <button class="primary-button" type="button" disabled title="Preview only">Preview button</button>
+            </section>
+          </div>
+
+          <div class="view" id="frontpageView">
+            <section class="merchant-header">
+              <div>
+                <p class="eyebrow">Design layout</p>
+                <h2>Design layout & promos</h2>
+                <p class="fee-note" id="designSyncStatus">Design changes save locally until backend sync is available.</p>
+              </div>
+              <button class="primary-button" type="button" id="resetFrontPageButton" data-permission-section="coreDesign">Reset</button>
+            </section>
+
+            <form class="catalog-form" id="frontPageForm" data-permission-section="coreDesign">
+              <label>
+                <span>Small headline</span>
+                <input id="heroEyebrowInput" type="text">
+              </label>
+              <label>
+                <span>Delivery area label</span>
+                <input id="deliveryAreaInput" type="text">
+              </label>
+              <label>
+                <span>Main headline</span>
+                <input id="heroTitleInput" type="text">
+              </label>
+              <label>
+                <span>Intro text</span>
+                <textarea id="heroDescriptionInput" rows="3"></textarea>
+              </label>
+              <label>
+                <span>Home nav: Home</span>
+                <input id="navHomeLabelInput" type="text">
+              </label>
+              <label>
+                <span>Home nav: Catalog</span>
+                <input id="navCatalogLabelInput" type="text">
+              </label>
+              <label>
+                <span>Home nav: Member Access</span>
+                <input id="navMemberLabelInput" type="text">
+              </label>
+              <label>
+                <span>Home nav: Cart</span>
+                <input id="navCartLabelInput" type="text">
+              </label>
+              <label>
+                <span>Home nav: Track Order</span>
+                <input id="navOrderLabelInput" type="text">
+              </label>
+              <label>
+                <span>Hero catalog button</span>
+                <input id="homeBrowseButtonInput" type="text">
+              </label>
+              <label>
+                <span>Hero member button</span>
+                <input id="homeMemberButtonInput" type="text">
+              </label>
+              <label>
+                <span>Hero tracking button</span>
+                <input id="homeTrackButtonInput" type="text">
+              </label>
+              <label>
+                <span>Home search label</span>
+                <input id="homeSearchLabelInput" type="text">
+              </label>
+              <label>
+                <span>Home search placeholder</span>
+                <input id="homeSearchPlaceholderInput" type="text">
+              </label>
+              <label>
+                <span>Home search button</span>
+                <input id="homeSearchButtonInput" type="text">
+              </label>
+              <label>
+                <span>Hero carousel images</span>
+                <textarea id="heroImagesInput" rows="4" placeholder="https://.../image-one.jpg&#10;https://.../image-two.jpg"></textarea>
+              </label>
+              <label>
+                <span>Upload hero carousel photos</span>
+                <input id="heroImagesFileInput" type="file" accept="image/*" multiple>
+              </label>
+              <label>
+                <span>Primary color</span>
+                <input id="layoutBrandColorInput" type="color" value="#193429">
+              </label>
+              <label>
+                <span>Style preset</span>
+                <select id="layoutStylePresetInput">
+                  <option value="fresh">Clean dispensary</option>
+                  <option value="premium">Premium dark</option>
+                  <option value="bright">Warm boutique</option>
+                </select>
+              </label>
+              <label>
+                <span>Brand line</span>
+                <input id="brandHeadlineInput" type="text">
+              </label>
+              <label>
+                <span>Brand small line</span>
+                <input id="brandEyebrowInput" type="text">
+              </label>
+              <label>
+                <span>Brand description</span>
+                <textarea id="brandDescriptionInput" rows="3"></textarea>
+              </label>
+              <label>
+                <span>Brand block layout</span>
+                <select id="brandLayoutInput">
+                  <option value="split">Logo left, text right</option>
+                  <option value="stacked">Centered stack</option>
+                  <option value="banner">Wide banner</option>
+                </select>
+              </label>
+              <label>
+                <span>Brand block style</span>
+                <select id="brandPanelStyleInput">
+                  <option value="light">Light card</option>
+                  <option value="dark">Dark card</option>
+                  <option value="clean">Clean border</option>
+                </select>
+              </label>
+              <label>
+                <span>Brand accent color</span>
+                <input id="brandAccentColorInput" type="color" value="#d8ad3f">
+              </label>
+              <label>
+                <span>Featured drop name</span>
+                <input id="featuredDropInput" type="text">
+              </label>
+              <label>
+                <span>Featured drop description</span>
+                <textarea id="featuredDescriptionInput" rows="2"></textarea>
+              </label>
+              <label>
+                <span>Flower note</span>
+                <textarea id="flowerNoteInput" rows="2"></textarea>
+              </label>
+              <label>
+                <span>Flower category button</span>
+                <input id="flowerCategoryButtonInput" type="text">
+              </label>
+              <label>
+                <span>Syrup note</span>
+                <textarea id="syrupNoteInput" rows="2"></textarea>
+              </label>
+              <label>
+                <span>Syrup category button</span>
+                <input id="syrupCategoryButtonInput" type="text">
+              </label>
+              <label>
+                <span>Apparel note</span>
+                <textarea id="apparelNoteInput" rows="2"></textarea>
+              </label>
+              <label>
+                <span>Apparel category button</span>
+                <input id="apparelCategoryButtonInput" type="text">
+              </label>
+              <label>
+                <span>Bottom cart button</span>
+                <input id="cartBarButtonInput" type="text">
+              </label>
+              <label>
+                <span>Cart browse button</span>
+                <input id="cartBrowseButtonInput" type="text">
+              </label>
+              <label>
+                <span>Cart checkout button</span>
+                <input id="cartCheckoutButtonInput" type="text">
+              </label>
+              <button class="primary-button full" type="submit">Save front page</button>
+            </form>
+
+            <section class="merchant-header">
+              <div>
+                <p class="eyebrow">Campaign studio</p>
+                <h2>Promos, logo & photos</h2>
+              </div>
+              <button class="primary-button" type="button" id="resetPromoButton" data-permission-section="promo">Reset</button>
+            </section>
+
+            <form class="catalog-form" id="promoForm" data-permission-section="promo">
+              <label class="toggle">
+                <input id="promoVisibleInput" type="checkbox">
+                <span>Show promo on front page</span>
+              </label>
+              <label>
+                <span>Promo small text</span>
+                <input id="promoEyebrowInput" type="text">
+              </label>
+              <label>
+                <span>Promo headline</span>
+                <input id="promoHeadlineInput" type="text">
+              </label>
+              <label>
+                <span>Promo description</span>
+                <textarea id="promoDescriptionInput" rows="3"></textarea>
+              </label>
+              <label>
+                <span>Promo button text</span>
+                <input id="promoButtonInput" type="text">
+              </label>
+              <label>
+                <span>Deal shoutout cards</span>
+                <textarea id="promoShoutoutsInput" rows="5" placeholder="Limited deal | Buy 3 Get 1 Free | Flower only through Sunday&#10;New cart drop | Live resin carts | Ask about brand options"></textarea>
+              </label>
+              <label>
+                <span>Promo banner images</span>
+                <textarea id="promoImagesInput" rows="4" placeholder="https://.../promo-one.jpg&#10;https://.../promo-two.jpg"></textarea>
+              </label>
+              <label>
+                <span>Upload promo banner photos</span>
+                <input id="promoImagesFileInput" type="file" accept="image/*" multiple>
+              </label>
+              <label>
+                <span>Brand logo or image URL</span>
+                <input id="logoImageUrlInput" type="url" placeholder="https://... or assets/logo.png">
+              </label>
+              <label>
+                <span>Upload brand logo or image</span>
+                <input id="logoImageFileInput" type="file" accept="image/*">
+              </label>
+              <label>
+                <span>Fallback hero image URL</span>
+                <input id="heroImageUrlInput" type="url" placeholder="https://... or assets/drop.png">
+              </label>
+              <label>
+                <span>Upload hero image</span>
+                <input id="heroImageFileInput" type="file" accept="image/*">
+              </label>
+              <button class="primary-button full" type="submit">Save promo</button>
+            </form>
+          </div>
+
+          <div class="view" id="promoView"></div>
+
+          <div class="view" id="accessView">
+            <section class="merchant-header">
+              <div>
+                <p class="eyebrow">Private codes</p>
+                <h2>Access codes</h2>
+              </div>
+              <button class="primary-button" type="button" id="resetCodesButton">Reset</button>
+            </section>
+
+            <section class="access-explainer" aria-label="Access code roles">
+              <article>
+                <p class="eyebrow">Customer</p>
+                <h3>Member only</h3>
+                <p>Weekly guest codes open temporary access. Approved members use their own member code.</p>
+              </article>
+              <article>
+                <p class="eyebrow">Admin</p>
+                <h3>Staff tools</h3>
+                <p>The admin code unlocks the staff side. Team roles decide which admin tabs each person can use.</p>
+              </article>
+              <article>
+                <p class="eyebrow">Drivers</p>
+                <h3>Assigned orders</h3>
+                <p>Driver accounts only see the allowed worker tools, not codes, backend settings, or core design controls.</p>
+              </article>
+            </section>
+
+            <section class="access-summary" aria-label="Current access setup">
+              <article>
+                <span>Guest code</span>
+                <strong id="guestCodeSummary">Set</strong>
+              </article>
+              <article>
+                <span>Approved members</span>
+                <strong id="memberCodeCount">0</strong>
+              </article>
+              <article hidden aria-hidden="true">
+                <span>Extra codes</span>
+                <strong id="inviteCodeCount">0</strong>
+              </article>
+              <article>
+                <span>Admin code</span>
+                <strong id="adminCodeSummary">Private</strong>
+              </article>
+              <article>
+                <span>Worker passcodes</span>
+                <strong id="workerCodeCount">0</strong>
+              </article>
+            </section>
+
+            <form class="catalog-form" id="accessCodesForm">
+              <label>
+                <span>Weekly guest code</span>
+                <input id="guestCodeInput" type="text" autocomplete="off">
+              </label>
+              <label>
+                <span>Guest code label</span>
+                <input id="guestCodeLabelInput" type="text" placeholder="Weekly Guest Code">
+              </label>
+              <label>
+                <span>Expiration or week label</span>
+                <input id="guestCodeExpiresInput" type="text" placeholder="Week of June 1">
+              </label>
+              <label hidden aria-hidden="true">
+                <span>Archived customer code</span>
+                <input id="customerCodeInput" type="text" autocomplete="off">
+              </label>
+              <label>
+                <span>Admin code</span>
+                <input id="adminCodeInput" type="text" autocomplete="off">
+              </label>
+              <label hidden aria-hidden="true">
+                <span>Extra codes</span>
+                <textarea id="inviteCodesInput" rows="4" placeholder="Weekly guest code is managed above"></textarea>
+              </label>
+              <p class="fee-note" id="accessCodeHelp">Guest code is for temporary private access. Approved member codes are managed below and should be unique per member.</p>
+              <button class="primary-button full" type="submit">Save codes</button>
+            </form>
+
+            <section class="member-admin-panel" aria-label="Member management">
+              <div class="merchant-header compact-header">
+                <div>
+                  <p class="eyebrow">Approved members</p>
+                  <h2>Member management</h2>
+                  <p class="fee-note">Approve guest requests, reset member codes, and keep internal notes.</p>
+                </div>
+                <button class="ghost-button" type="button" id="refreshMembersButton">Refresh</button>
+              </div>
+              <form class="catalog-form" id="memberAdminForm">
+                <input id="editingMemberIdInput" type="hidden">
+                <label>
+                  <span>Member name</span>
+                  <input id="adminMemberNameInput" type="text" autocomplete="off">
+                </label>
+                <label>
+                  <span>Phone</span>
+                  <input id="adminMemberPhoneInput" type="tel" autocomplete="off">
+                </label>
+                <label>
+                  <span>Email</span>
+                  <input id="adminMemberEmailInput" type="email" autocomplete="off">
+                </label>
+                <label>
+                  <span>Member code</span>
+                  <input id="adminMemberCodeInput" type="text" autocomplete="off" placeholder="Auto-generated if blank">
+                </label>
+                <label>
+                  <span>Status</span>
+                  <select id="adminMemberStatusInput">
+                    <option value="pending">Pending</option>
+                    <option value="approved">Approved</option>
+                    <option value="denied">Denied</option>
+                    <option value="disabled">Disabled</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Internal notes</span>
+                  <textarea id="adminMemberNotesInput" rows="3"></textarea>
+                </label>
+                <div class="catalog-edit-row">
+                  <button class="primary-button full" type="submit" id="adminMemberSubmitButton">Save member</button>
+                  <button class="ghost-button" type="button" id="cancelMemberEditButton" hidden>Cancel</button>
+                </div>
+              </form>
+              <section class="team-list member-admin-list" id="memberAdminList" aria-label="Members and requests"></section>
+            </section>
+          </div>
+
+          <div class="view" id="teamView">
+            <section class="merchant-header">
+              <div>
+                <p class="eyebrow">Admin security</p>
+                <h2>Team roles</h2>
+                <p class="fee-note" id="currentAdminProfile">Sign in to Supabase to identify this admin.</p>
+              </div>
+            </section>
+
+            <form class="catalog-form" id="teamMemberForm">
+              <label>
+                <span>Name</span>
+                <input id="teamMemberNameInput" type="text" placeholder="Driver name">
+              </label>
+              <label>
+                <span>Worker title</span>
+                <input id="teamMemberTitleInput" type="text" placeholder="Driver, packer, menu helper">
+              </label>
+              <label>
+                <span>Email (optional for now)</span>
+                <input id="teamMemberEmailInput" type="email" placeholder="worker@example.com">
+              </label>
+              <label>
+                <span>Worker passcode</span>
+                <input id="teamMemberPasscodeInput" type="text" autocomplete="off" placeholder="DRIVER01">
+              </label>
+              <label>
+                <span>Role</span>
+                <select id="teamMemberRoleInput">
+                  <option value="manager">Manager</option>
+                  <option value="driver">Driver</option>
+                </select>
+              </label>
+              <label class="toggle">
+                <input id="teamMemberActiveInput" type="checkbox" checked>
+                <span>Active team member</span>
+              </label>
+              <section class="permission-panel" aria-label="Worker access permissions">
+                <p class="eyebrow">Worker access</p>
+                <label>
+                  <input type="checkbox" data-team-permission="orders">
+                  <span>Orders queue</span>
+                </label>
+                <label>
+                  <input type="checkbox" data-team-permission="driverBoard">
+                  <span>Driver board</span>
+                </label>
+                <label>
+                  <input type="checkbox" data-team-permission="assignOrders">
+                  <span>Assign orders</span>
+                </label>
+                <label>
+                  <input type="checkbox" data-team-permission="editMenu">
+                  <span>Menu and inventory</span>
+                </label>
+                <label>
+                  <input type="checkbox" data-team-permission="promo">
+                  <span>Promos</span>
+                </label>
+                <label>
+                  <input type="checkbox" data-team-permission="delivery">
+                  <span>Delivery fees and discounts</span>
+                </label>
+              </section>
+              <p class="fee-note">Admin code still controls access codes and team management. Worker passcodes only unlock the allowed worker tabs selected here.</p>
+              <div class="catalog-edit-row">
+                <button class="primary-button full" type="submit" id="teamMemberSubmitButton">Save worker</button>
+                <button class="ghost-button" type="button" id="cancelTeamEditButton" hidden>Cancel</button>
+              </div>
+            </form>
+
+            <section class="team-list" id="teamMemberList" aria-label="Admin team members"></section>
+          </div>
+
+          <div class="view" id="backendView">
+            <section class="merchant-header">
+              <div>
+                <p class="eyebrow">Shared data</p>
+                <h2>Supabase sync</h2>
+              </div>
+              <button class="primary-button" type="button" id="syncFromBackendButton">Pull latest</button>
+            </section>
+
+            <form class="catalog-form" id="backendLoginForm">
+              <p class="fee-note" id="backendStatus">Backend not connected yet.</p>
+              <label>
+                <span>Admin email</span>
+                <input id="backendEmailInput" type="email" autocomplete="email">
+              </label>
+              <label>
+                <span>Password</span>
+                <input id="backendPasswordInput" type="password" autocomplete="current-password">
+              </label>
+              <button class="primary-button full" type="submit">Sign in to Supabase</button>
+              <button class="ghost-button" type="button" id="pushToBackendButton">Push this browser data</button>
+              <button class="danger-button" type="button" id="backendSignOutButton">Sign out</button>
+            </form>
+          </div>
+
+          <div class="view" id="settingsView">
+            <section class="merchant-header">
+              <div>
+                <p class="eyebrow">Operations</p>
+                <h2>Delivery options</h2>
+                <p class="fee-note" id="deliverySyncStatus">Delivery settings save locally until backend sync is available.</p>
+              </div>
+              <button class="primary-button" type="button" id="resetSettingsButton">Reset</button>
+            </section>
+
+            <form class="catalog-form" id="deliverySettingsForm">
+              <label>
+                <span>Business name</span>
+                <input id="businessNameSettingInput" type="text">
+              </label>
+              <label>
+                <span>Business type</span>
+                <input id="businessTypeSettingInput" type="text" placeholder="Private product delivery">
+              </label>
+              <label>
+                <span>Compliance mode</span>
+                <select id="complianceModeInput">
+                  <option value="standard">Standard private catalog</option>
+                  <option value="cannabis">Cannabis test model</option>
+                </select>
+              </label>
+              <label>
+                <span>Minimum age</span>
+                <input id="minimumAgeInput" type="number" min="0" step="1">
+              </label>
+              <label class="toggle">
+                <input id="memberOnlyModeInput" type="checkbox" checked>
+                <span>Member-only access</span>
+              </label>
+              <label class="toggle">
+                <input id="weeklyGuestCodeEnabledInput" type="checkbox" checked>
+                <span>Weekly guest code enabled</span>
+              </label>
+              <label class="toggle">
+                <input id="guestCanViewMenuInput" type="checkbox" checked>
+                <span>Guests can view private menu</span>
+              </label>
+              <label class="toggle">
+                <input id="guestCanPlaceFirstOrderInput" type="checkbox" checked>
+                <span>Guests can place first order request</span>
+              </label>
+              <label class="toggle">
+                <input id="memberApprovalRequiredInput" type="checkbox" checked>
+                <span>Member approval required</span>
+              </label>
+              <label class="toggle">
+                <input id="approvedMemberCodesEnabledInput" type="checkbox" checked>
+                <span>Approved member codes enabled</span>
+              </label>
+              <label class="toggle">
+                <input id="ageGateRequiredInput" type="checkbox" checked>
+                <span>Age gate required</span>
+              </label>
+              <label class="toggle">
+                <input id="idVerificationRequiredInput" type="checkbox" checked>
+                <span>ID verification required</span>
+              </label>
+              <label class="toggle">
+                <input id="deliveryEnabledInput" type="checkbox" checked>
+                <span>Delivery enabled</span>
+              </label>
+              <label class="toggle">
+                <input id="pickupEnabledInput" type="checkbox">
+                <span>Pickup enabled</span>
+              </label>
+              <label class="toggle">
+                <input id="complianceChecklistEnabledInput" type="checkbox" checked>
+                <span>Compliance checklist enabled</span>
+              </label>
+              <label>
+                <span>Minimum order amount</span>
+                <input id="minimumOrderInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Minimum order fee</span>
+                <input id="minimumOrderFeeInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Standard local delivery</span>
+                <input id="baseDeliveryFeeInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Rush delivery upgrade</span>
+                <input id="rushDeliveryFeeInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Farther delivery upgrade</span>
+                <input id="extendedDeliveryFeeInput" type="number" min="0" step="1">
+              </label>
+              <label>
+                <span>Sales tax rate (%)</span>
+                <input id="taxRateInput" type="number" min="0" step="0.01">
+              </label>
+              <label>
+                <span>Automatic discount label</span>
+                <input id="discountLabelInput" type="text" placeholder="First order">
+              </label>
+              <label>
+                <span>Automatic discount (%)</span>
+                <input id="discountPercentInput" type="number" min="0" max="100" step="1">
+              </label>
+              <label>
+                <span>Promo codes</span>
+                <textarea id="promoCodesInput" rows="4" placeholder="WELCOME10 | percent | 10 | Welcome deal&#10;BUTTES5 | fixed | 5 | $5 off"></textarea>
+              </label>
+              <label>
+                <span>Bundle deals</span>
+                <textarea id="bundleDealsInput" rows="4" placeholder="Buy 3 Get 1 Free | Flower | 3 | 1 | 100&#10;Buy 2 Get 1 Half Off | Syrup | 2 | 1 | 50"></textarea>
+              </label>
+              <label>
+                <span>Delivery zones</span>
+                <textarea id="deliveryZonesInput" rows="3"></textarea>
+              </label>
+              <button class="primary-button full" type="submit">Save delivery settings</button>
+            </form>
+          </div>
+        </section>
+
+        <section class="checkout-panel" id="checkoutPanel" hidden>
+          <form class="checkout-form" id="checkoutForm">
+            <div class="merchant-header">
+              <div>
+                <p class="eyebrow">Member order request</p>
+                <h2>Fulfillment details</h2>
+              </div>
+              <button class="ghost-button" type="button" id="closeCheckoutButton">Close</button>
+            </div>
+            <p class="fee-note" id="feeNote">Estimated payment is reviewed before fulfillment. ID verification may be required.</p>
+            <section class="member-checkout-summary" id="memberCheckoutSummary" hidden>
+              <p class="eyebrow">Approved member</p>
+              <h3 id="memberCheckoutName">Ordering as: Member</h3>
+              <p><strong>Phone:</strong> <span id="memberCheckoutPhone">On file</span></p>
+              <p><strong>Email:</strong> <span id="memberCheckoutEmail">Not provided</span></p>
+            </section>
+            <section class="cart-review" aria-label="Cart review">
+              <h3>Cart</h3>
+              <div class="cart-lines" id="cartLines"></div>
+              <div class="promo-code-row">
+                <input id="promoCodeInput" type="text" placeholder="Promo code" autocomplete="off">
+                <button class="ghost-button" type="button" id="applyPromoCodeButton">Apply</button>
+              </div>
+              <p class="promo-code-message" id="promoCodeMessage"></p>
+              <div class="cart-totals" id="cartTotals"></div>
+            </section>
+            <label id="customerNameField">
+              <span>Name</span>
+              <input id="customerName" type="text" autocomplete="name" required>
+            </label>
+            <label id="customerPhoneField">
+              <span>Phone number</span>
+              <input id="customerPhone" type="tel" autocomplete="tel" required>
+            </label>
+            <label id="customerEmailField">
+              <span>Email updates (optional)</span>
+              <input id="customerEmail" type="email" autocomplete="email" placeholder="you@example.com">
+            </label>
+            <label class="toggle member-toggle" id="rememberMemberEmailField">
+              <input id="rememberMemberEmail" type="checkbox" checked>
+              <span>Save email for member updates</span>
+            </label>
+            <label>
+              <span>Preferred contact</span>
+              <select id="customerContactMethod">
+                <option value="Text">Text</option>
+                <option value="Call">Call</option>
+              </select>
+            </label>
+            <label>
+              <span>Delivery address</span>
+              <input id="customerAddress" type="text" autocomplete="street-address" required>
+            </label>
+            <label>
+              <span>Delivery speed / distance</span>
+              <select id="deliveryOption">
+                <option value="standard">Standard local delivery</option>
+                <option value="rush">Rush delivery</option>
+                <option value="extended">Farther delivery area</option>
+              </select>
+            </label>
+            <label>
+              <span>Delivery instructions</span>
+              <textarea id="deliveryInstructions" rows="3" placeholder="Gate code, cross street, parking notes"></textarea>
+            </label>
+            <button class="primary-button full" type="submit">Send cash order request</button>
+          </form>
+        </section>
+
+        <section class="confirmation-panel" id="confirmationPanel" hidden>
+          <div class="confirmation-card">
+            <p class="eyebrow">Request sent</p>
+            <h2 id="confirmationOrderNumber">#0000</h2>
+            <p class="confirmation-screenshot-note">Screenshot this request number before leaving the app. This is pending review, not accepted yet.</p>
+            <p id="confirmationMessage">Save this request number. We will review and confirm shortly.</p>
+            <div class="confirmation-total">
+              <span>Estimated cash due</span>
+              <strong id="confirmationTotal">$0.00</strong>
+            </div>
+            <section class="confirmation-details" id="confirmationDetails"></section>
+            <section class="confirmation-items" id="confirmationItems"></section>
+            <p class="fee-note">Use Order Lookup with this exact order number if you leave the app.</p>
+            <div class="confirmation-actions">
+              <button class="primary-button" type="button" id="trackReceiptButton">Track order</button>
+              <button class="ghost-button" type="button" id="closeConfirmationButton">Back to Catalog</button>
+            </div>
+          </div>
+        </section>
+
+        <footer class="basket-bar">
+          <div>
+            <p class="eyebrow">Basket</p>
+            <strong id="basketSummary">0 items</strong>
+            <p class="basket-detail" id="basketDetail">$0.00 cash subtotal</p>
+          </div>
+          <button class="primary-button" type="button" id="checkoutButton">Cart / Checkout</button>
+        </footer>
+      </section>
+
+      <aside class="build-notes" aria-label="Platform notes">
+        <h2 id="notesTitle">Private Member Portal</h2>
+        <p>
+          A private catalog and order request platform for verified members,
+          with editable products and a fulfillment queue.
+        </p>
+        <ul>
+          <li>Member access, compliance settings, and ID requirements stay configurable.</li>
+          <li>Menu admin lets you add, pause, and remove products often.</li>
+          <li>Member flow stays focused: browse, cart, request, and track fulfillment.</li>
+        </ul>
+      </aside>
+    </main>
+
+    <script src="backend-config.js?v=52"></script>
+    <script src="backend.js?v=52"></script>
+    <script src="app.js?v=52"></script>
+  </body>
+</html>
