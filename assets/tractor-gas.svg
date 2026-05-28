@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+  <rect width="640" height="640" fill="#080807"/>
+  <circle cx="320" cy="286" r="204" fill="#183528" stroke="#d8ad3f" stroke-width="10"/>
+  <path d="M140 356c88-94 152-142 218-142 60 0 112 42 164 134-66-31-122-46-168-46-65 0-131 18-214 54Z" fill="#315f32"/>
+  <path d="M214 314h202l42 86H174l40-86Z" fill="#14301f" stroke="#d8ad3f" stroke-width="8"/>
+  <circle cx="235" cy="413" r="42" fill="#111" stroke="#d8ad3f" stroke-width="12"/>
+  <circle cx="405" cy="413" r="42" fill="#111" stroke="#d8ad3f" stroke-width="12"/>
+  <text x="320" y="118" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-size="62" fill="#d8ad3f">TRACTOR GAS</text>
+  <text x="320" y="545" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-size="34" fill="#fffdf5">SUTTER BUTTES</text>
+</svg>

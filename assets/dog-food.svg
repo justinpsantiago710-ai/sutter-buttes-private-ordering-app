@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+  <rect width="640" height="640" fill="#090908"/>
+  <ellipse cx="320" cy="356" rx="226" ry="154" fill="#123225" stroke="#d8ad3f" stroke-width="10"/>
+  <circle cx="210" cy="308" r="62" fill="#7a4a25"/>
+  <circle cx="320" cy="292" r="64" fill="#9a6b38"/>
+  <circle cx="430" cy="308" r="62" fill="#5a3b24"/>
+  <rect x="166" y="382" width="308" height="70" rx="20" fill="#d8ad3f"/>
+  <text x="320" y="130" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-size="76" fill="#d8ad3f">DOG FOOD</text>
+  <text x="320" y="525" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-size="34" fill="#fffdf5">SUTTER BUTTES</text>
+</svg>
