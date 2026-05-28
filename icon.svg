@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#193429"/>
-  <circle cx="372" cy="148" r="38" fill="#d8ad3f"/>
-  <path d="M84 330 188 154l74 116 66-92 100 152H84Z" fill="#fffdf5"/>
-  <path d="M188 154 147 330h81l34-60-74-116Zm140 24-36 152h136L328 178Z" fill="#8d8a4a"/>
-  <path d="M110 374h292" stroke="#d8ad3f" stroke-width="18" stroke-linecap="round"/>
-  <text x="256" y="432" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="900" fill="#fffdf5">SB</text>
-</svg>
